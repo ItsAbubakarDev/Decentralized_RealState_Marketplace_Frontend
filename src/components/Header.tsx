@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Bell, Wallet, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
+import { ConnectButton } from "thirdweb/react";
+import { client } from "../app/client";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -41,12 +43,15 @@ export default function Header() {
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-
-          {/* Connect Wallet */}
-          <button className="hidden sm:flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-primary-foreground text-sm font-medium hover:opacity-90 transition">
-            <Wallet size={16} />
-            Connect Wallet
-          </button>
+          <div className="flex justify-center ">
+                <ConnectButton
+                    client={client}
+                    appMetadata={{
+                      name: "Example App",
+                      url: "https://example.com",
+                    }}
+                />
+          </div>
 
           {/* Notifications */}
           <button className="relative rounded-full p-2 hover:bg-muted transition">
