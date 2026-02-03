@@ -15,7 +15,8 @@ Install the template using [thirdweb create](https://portal.thirdweb.com/cli/cre
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file:
-a
+fe
+
 
 `CLIENT_ID`
 
