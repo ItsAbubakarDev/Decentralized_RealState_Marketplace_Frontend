@@ -20,11 +20,21 @@ interface Property {
     reviews: string[];
 }
 
+import UpdateProperty from "./UpdateProperty";
+import UpdatePropertyPrice from "./updatePropertyPrice";
+import { Edit, DollarSign, X } from "lucide-react";
+
+// ... existing imports
+
 export default function GetUserProperties() {
     const account = useActiveAccount();
     const [userProperties, setUserProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any>(null);
+
+    // Modal state
+    const [selectedPropertyId, setSelectedPropertyId] = useState<bigint | null>(null);
+    const [modalType, setModalType] = useState<'details' | 'price' | null>(null);
 
     const contract = getContract({
         client,
@@ -33,6 +43,7 @@ export default function GetUserProperties() {
     });
 
     const fetchUserProperties = async () => {
+        // ... existing fetch logic
         if (!account) return;
 
         setError(null);
@@ -59,6 +70,19 @@ export default function GetUserProperties() {
             fetchUserProperties();
         }
     }, [account]);
+
+    const openModal = (propertyId: bigint, type: 'details' | 'price') => {
+        setSelectedPropertyId(propertyId);
+        setModalType(type);
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    };
+
+    const closeModal = () => {
+        setModalType(null);
+        setSelectedPropertyId(null);
+        document.body.style.overflow = 'unset'; // Restore scrolling
+        fetchUserProperties(); // Refresh properties after update
+    };
 
     if (!account) return null;
 
@@ -136,20 +160,67 @@ export default function GetUserProperties() {
                                     <span className="truncate">{property.propertyAddress}</span>
                                 </div>
 
-                                <div className="mt-auto border-t border-border pt-4 flex justify-between items-center">
-                                    <span className="text-xs font-medium px-2 py-1 bg-muted rounded text-muted-foreground">
-                                        ID: {property.propertyID.toString()}
-                                    </span>
-                                    <Link
-                                        href={`/property/${property.propertyID}`}
-                                        className="text-primary text-sm font-semibold flex items-center hover:underline"
-                                    >
-                                        View Details <ArrowRight className="w-4 h-4 ml-1" />
-                                    </Link>
+                                <div className="mt-auto pt-4 border-t border-border flex flex-col gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            onClick={() => openModal(property.propertyID, 'details')}
+                                            className="flex items-center justify-center gap-1.5 px-3 py-2 bg-muted hover:bg-muted/80 text-foreground text-sm font-medium rounded-lg transition-colors border border-border/50"
+                                        >
+                                            <Edit className="w-3.5 h-3.5" />
+                                            Details
+                                        </button>
+                                        <button
+                                            onClick={() => openModal(property.propertyID, 'price')}
+                                            className="flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-sm font-medium rounded-lg transition-colors border border-emerald-500/20"
+                                        >
+                                            <DollarSign className="w-3.5 h-3.5" />
+                                            Price
+                                        </button>
+                                    </div>
+
+                                    <div className="flex justify-between items-center pt-2">
+                                        <span className="text-xs font-medium px-2 py-1 bg-muted rounded text-muted-foreground">
+                                            ID: {property.propertyID.toString()}
+                                        </span>
+                                        <Link
+                                            href={`/property/${property.propertyID}`}
+                                            className="text-primary text-sm font-semibold flex items-center hover:underline"
+                                        >
+                                            View Page <ArrowRight className="w-4 h-4 ml-1" />
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     ))}
+                </div>
+            )}
+
+            {/* Modal */}
+            {modalType && selectedPropertyId !== null && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div
+                        className="bg-card w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl border border-border flex flex-col animate-in zoom-in-95 duration-200"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="sticky top-0 right-0 z-10 flex justify-end p-4 bg-card/80 backdrop-blur-sm">
+                            <button
+                                onClick={closeModal}
+                                className="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        <div className="px-6 pb-8 pt-2">
+                            {modalType === 'details' && (
+                                <UpdateProperty propertyId={selectedPropertyId} />
+                            )}
+                            {modalType === 'price' && (
+                                <UpdatePropertyPrice propertyId={selectedPropertyId} />
+                            )}
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
