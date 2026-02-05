@@ -10,6 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "ethers": "^6.16.0",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.563.0",
     "next": "15.4.10",

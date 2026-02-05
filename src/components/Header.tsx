@@ -44,13 +44,13 @@ export default function Header() {
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           <div className="flex justify-center ">
-                <ConnectButton
-                    client={client}
-                    appMetadata={{
-                      name: "Example App",
-                      url: "https://example.com",
-                    }}
-                />
+            <ConnectButton
+              client={client}
+              appMetadata={{
+                name: "Example App",
+                url: "https://example.com",
+              }}
+            />
           </div>
 
           {/* Notifications */}
@@ -60,9 +60,12 @@ export default function Header() {
           </button>
 
           {/* Profile */}
-          <div className="h-9 w-9 rounded-full bg-muted flex items-center justify-center cursor-pointer">
-            <span className="text-sm font-semibold">A</span>
-          </div>
+          {/* Profile */}
+          <Link href="/profile">
+            <div className="h-9 w-9 rounded-full bg-muted flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all">
+              <span className="text-sm font-semibold">A</span>
+            </div>
+          </Link>
         </div>
       </div>
     </header>

@@ -15,26 +15,30 @@
   font-variation-settings: "slnt" 0;
   /* sugar */
   --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --primary: 217 91% 60%;
+  --foreground: 0 0% 10%;
+  --primary: 24 100% 50%;
   --primary-foreground: 0 0% 100%;
-  --border: 214 32% 91%;
-  --muted: 210 40% 96%;
+  --border: 0 0% 90%;
+  --muted: 0 0% 96%;
   /* sugar */
 }
+
 /* sugar */
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-    --border: 217 32% 17%;
-    --muted: 217 32% 17%;
-  }
-  /* sugar */
+.dark {
+  --background: 220 20% 10%;
+  /* Deep Charcoal / Near Black */
+  --foreground: 0 0% 98%;
+  --primary: 24 100% 50%;
+  /* #FF6600 */
+  --primary-foreground: 0 0% 100%;
+  --border: 220 20% 20%;
+  --muted: 220 20% 15%;
+}
+
+/* sugar */
 
 @layer base {
   body {
-    @apply bg-zinc-950 text-neutral-200;
+    @apply bg-background text-foreground;
   }
 }
