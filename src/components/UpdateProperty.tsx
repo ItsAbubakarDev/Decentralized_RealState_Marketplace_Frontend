@@ -41,7 +41,7 @@ export default function UpdateProperty({ propertyId }: { propertyId: bigint }) {
     // Fetch existing property details
     useEffect(() => {
         const fetchPropertyDetails = async () => {
-            if (!propertyId) return;
+            if (propertyId === undefined || propertyId === null) return;
 
             setLoading(true);
             try {
