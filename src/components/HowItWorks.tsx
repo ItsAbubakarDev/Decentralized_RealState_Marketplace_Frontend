@@ -20,7 +20,7 @@ const steps = [
 
 const HowItWorks = () => {
     return (
-        <section className="py-24 bg-[#080808]">
+        <section className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">How It Works</h2>
@@ -35,7 +35,7 @@ const HowItWorks = () => {
 
                     {steps.map((step, index) => (
                         <div key={index} className="flex flex-col items-center text-center relative z-10">
-                            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-border flex items-center justify-center mb-8 shadow-xl shadow-primary/5 group hover:border-primary/50 transition-colors duration-300">
+                            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-black border border-border flex items-center justify-center mb-8 shadow-xl shadow-primary/5 group hover:border-primary/50 transition-colors duration-300">
                                 <step.icon size={40} className="text-primary group-hover:scale-110 transition-transform duration-300" />
                             </div>
 

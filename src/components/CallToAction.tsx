@@ -7,7 +7,7 @@ const CallToAction = () => {
     return (
         <section className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                <div className="rounded-3xl bg-gradient-to-r from-zinc-900 via-zinc-900 to-black border border-border p-8 md:p-16 text-center relative overflow-hidden">
+                <div className="rounded-3xl bg-card dark:bg-gradient-to-r dark:from-zinc-900 dark:via-zinc-900 dark:to-black border border-border p-8 md:p-16 text-center relative overflow-hidden shadow-2xl">
 
                     {/* Decorative Glow */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-primary/20 blur-[100px] rounded-full -z-1" />
@@ -28,15 +28,15 @@ const CallToAction = () => {
                             Explore Properties
                         </Link>
 
-                        <ConnectButton
-                            client={client}
-                            className="bg-transparent border-2 border-primary text-primary hover:bg-primary/10 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 min-w-[200px]"
-                            appMetadata={{
-                                name: "Real State Poject",
-                                url: "https://realstate.com",
-                            }}
-                        >
-                        </ConnectButton>
+                        <div className="min-w-[200px]">
+                            <ConnectButton
+                                client={client}
+                                appMetadata={{
+                                    name: "Real State Poject",
+                                    url: "https://realstate.com",
+                                }}
+                            />
+                        </div>
 
                     </div>
                 </div>
