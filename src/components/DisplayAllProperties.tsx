@@ -3,6 +3,7 @@
 import { client } from "../app/client";
 import { polygonAmoy } from "thirdweb/chains";
 import { getContract, readContract } from "thirdweb";
+import { MediaRenderer } from "thirdweb/react";
 import { useState, useEffect } from "react";
 
 // Define the Property type based on your smart contract
@@ -22,7 +23,7 @@ interface Property {
 const contract = getContract({
     client,
     chain: polygonAmoy,
-    address: "0x77Cf5f9aEf80d5f73d3A31CE4C86fa3aD60AED18",
+    address: "0xA7f4eA9e938f78C95172DDaBDb38712D3147d977",
 })
 
 export default function DisplayAllProperties() {
@@ -134,13 +135,11 @@ export default function DisplayAllProperties() {
                                 className="group bg-card rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 hover:shadow-xl transition-all duration-300 flex flex-col"
                             >
                                 <div className="relative aspect-[4/3] overflow-hidden">
-                                    <img
+                                    <MediaRenderer
+                                        client={client}
                                         src={property.image}
                                         alt={property.propertyTitle}
                                         className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                                        onError={(e) => {
-                                            e.currentTarget.src = "https://images.unsplash.com/photo-1580587771525-78b9dba3b91d?auto=format&fit=crop&w=800&q=80";
-                                        }}
                                     />
                                     <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider">
                                         {property.category}

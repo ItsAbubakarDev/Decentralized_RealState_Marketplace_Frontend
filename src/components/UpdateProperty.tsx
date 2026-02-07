@@ -1,10 +1,9 @@
 "use client";
 import { client } from "../app/client";
 import { getContract, readContract, prepareContractCall } from "thirdweb";
-import { useSendTransaction } from "thirdweb/react";
+import { useSendTransaction, useActiveAccount, MediaRenderer } from "thirdweb/react";
 import { useState, useEffect } from "react";
 import { polygonAmoy } from "thirdweb/chains";
-import { useActiveAccount } from "thirdweb/react";
 
 interface Property {
     propertyID: bigint;
@@ -23,7 +22,7 @@ export default function UpdateProperty({ propertyId }: { propertyId: bigint }) {
     const contract = getContract({
         client,
         chain: polygonAmoy,
-        address: "0x77Cf5f9aEf80d5f73d3A31CE4C86fa3aD60AED18"
+        address: "0xA7f4eA9e938f78C95172DDaBDb38712D3147d977"
     });
 
     const account = useActiveAccount();
@@ -240,13 +239,11 @@ export default function UpdateProperty({ propertyId }: { propertyId: bigint }) {
                 <div className="mt-4">
                     <p className="text-sm font-medium mb-2">Image Preview</p>
                     <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-muted">
-                        <img
+                        <MediaRenderer
+                            client={client}
                             src={image}
                             alt="Property preview"
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                                e.currentTarget.src = "/placeholder-property.jpg";
-                            }}
                         />
                     </div>
                 </div>

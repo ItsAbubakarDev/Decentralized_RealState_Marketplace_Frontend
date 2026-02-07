@@ -17,7 +17,7 @@ export default function LikeReview({ propertyId, reviewId }: LikeReviewProps) {
     const contract = getContract({
         client,
         chain: polygonAmoy,
-        address: "0x77Cf5f9aEf80d5f73d3A31CE4C86fa3aD60AED18"
+        address: "0xA7f4eA9e938f78C95172DDaBDb38712D3147d977"
     });
 
     const likeReview = async () => {
